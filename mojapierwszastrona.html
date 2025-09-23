@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Moja Pierwsza Strona</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: pink;
+      background-image: url("https://i.imgur.com/cZ4jvWp.png"); /* serduszkowe tło */
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      color: red;
+      font-size: 36px;
+      text-shadow: 2px 2px 10px white;
+      animation: pulsuj 2s infinite;
+    }
+    h2 {
+      margin-top: 20px;
+      font-size: 28px;
+      color: white;
+      text-shadow: 1px 1px 8px black;
+    }
+    img {
+      margin-top: 15px;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    .controls {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 12px 22px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background-color: red;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      transition: 0.2s;
+    }
+    button:hover { transform: scale(1.05); background-color: darkred; }
+    a.spotify-link {
+      display: inline-block;
+      padding: 10px 16px;
+      background: #1DB954;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 8px rgba(0,0,0,0.25);
+    }
+    #love-message {
+      display: none;
+      font-size: 100px; /* DUŻO większy napis */
+      color: white;
+      text-shadow: 4px 4px 30px red;
+      margin-top: 40px;
+      animation: pojaw 2s ease forwards, pulsuj 2s infinite;
+      word-break: break-word;
+    }
+    .spotify-embed {
+      margin-top: 18px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    @keyframes pulsuj {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    @keyframes pojaw {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* responsywność dla dużego napisu */
+    @media (max-width: 800px) {
+      #love-message { font-size: 48px; }
+      img { max-width: 320px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 To Moja Pierwsza Zaprogramowana Strona KOCHAM CIĘ! 💖</h1>
+  <h2>✨ Witam Cię na mojej pierwszej napisanej stronie ✨</h2>
+
+  <!-- Twoje zdjęcie (zmniejszone do max 400px) -->
+  <img src="mojazdziewczyna.jpg" alt="Moja dziewczyna">
+
+  <div class="controls">
+    <!-- przycisk pokazujący wielki napis + odtwarzający lokalny plik muzyczny -->
+    <button onclick="pokazLove()">Kliknij mnie 💘</button>
+
+    <!-- link do Spotify (otwiera w nowej karcie) -->
+    <a class="spotify-link" href="https://open.spotify.com/track/0c4tY4Ci6zHxfLzlixPoJW" target="_blank" rel="noopener">Odsłuchaj na Spotify — Chada „L”</a>
+  </div>
+
+  <!-- Opcjonalny osadzony odtwarzacz Spotify -->
+  <div class="spotify-embed" style="width: 320px; height: 80px;">
+    <iframe
+      src="https://open.spotify.com/embed/track/0c4tY4Ci6zHxfLzlixPoJW"
+      width="320"
+      height="80"
+      frameborder="0"
+      allowtransparency="true"
+      allow="encrypted-media">
+    </iframe>
+  </div>
+
+  <!-- Duży pulsujący napis, który pojawi się po kliknięciu -->
+  <div id="love-message">KOCHAM CIĘ 💕</div>
+
+  <!-- Lokalna muzyka (jeśli masz plik muzyka.mp3) -->
+  <audio id="muzyka" src="muzyka.mp3"></audio>
+
+  <script>
+    function pokazLove() {
+      // pokaż wielki napis
+      const love = document.getElementById("love-message");
+      love.style.display = "block";
+      // spróbuj odtworzyć lokalną muzykę (jeśli jest dostępna)
+      const audio = document.getElementById("muzyka");
+      if (audio) {
+        // play zwróci promise; niektórzy użytkownicy muszą najpierw zezwolić na audio w przeglądarce
+        audio.play().catch(e => {
+          // jeśli autoplay zablokowany, możesz poprosić użytkownika o kliknięcie ponownie
+          console.log("Odtwarzanie lokalnej muzyki zablokowane przez przeglądarkę:", e);
+        });
+      }
+      // przewiń do napisu (opcjonalne, ładniejszy efekt na małych ekranach)
+      love.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  </script>
+</body>
+</html>
