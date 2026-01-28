@@ -1,155 +1,225 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="no">
 <head>
-  <meta charset="UTF-8">
-  <title>Moja Pierwsza Strona</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: pink;
-      background-image: url("https://i.imgur.com/cZ4jvWp.png"); /* serduszkowe tło */
-      background-size: cover;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    h1 {
-      color: red;
-      font-size: 36px;
-      text-shadow: 2px 2px 10px white;
-      animation: pulsuj 2s infinite;
-    }
-    h2 {
-      margin-top: 20px;
-      font-size: 28px;
-      color: white;
-      text-shadow: 1px 1px 8px black;
-    }
-    img {
-      margin-top: 15px;
-      max-width: 400px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
-    .controls {
-      margin-top: 18px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    button {
-      padding: 12px 22px;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      background-color: red;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      transition: 0.2s;
-    }
-    button:hover { transform: scale(1.05); background-color: darkred; }
-    a.spotify-link {
-      display: inline-block;
-      padding: 10px 16px;
-      background: #1DB954;
-      color: white;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 8px rgba(0,0,0,0.25);
-    }
-    #love-message {
-      display: none;
-      font-size: 100px; /* DUŻO większy napis */
-      color: white;
-      text-shadow: 4px 4px 30px red;
-      margin-top: 40px;
-      animation: pojaw 2s ease forwards, pulsuj 2s infinite;
-      word-break: break-word;
-    }
-    .spotify-embed {
-      margin-top: 18px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-    }
-
-    @keyframes pulsuj {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    @keyframes pojaw {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* responsywność dla dużego napisu */
-    @media (max-width: 800px) {
-      #love-message { font-size: 48px; }
-      img { max-width: 320px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">ProVent AS - Ventilasjon, Isolasjon, Service</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        header { background: #004080; color: white; padding: 1rem; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo { height: 60px; } /* Dostosowane do załączonego logo */
+        .lang-switch { display: flex; gap: 10px; }
+        .lang-btn { background: #0066cc; color: white; border: none; padding: 0.5rem 1rem; cursor: pointer; border-radius: 5px; }
+        .lang-btn.active { background: #ff6600; }
+        .menu { display: flex; gap: 1rem; }
+        .menu a { color: white; text-decoration: none; }
+        main { margin-top: 80px; max-width: 1200px; margin: 80px auto 0; padding: 2rem; }
+        section { margin-bottom: 3rem; }
+        h1, h2 { color: #004080; }
+        .hero { text-align: center; background: #f4f4f4; padding: 4rem 2rem; }
+        .services, .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .card { background: white; border: 1px solid #ddd; border-radius: 10px; padding: 1.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        footer { background: #333; color: white; text-align: center; padding: 2rem; }
+        @media (max-width: 768px) { .menu { display: none; } .lang-switch { flex-direction: column; } }
+    </style>
 </head>
 <body>
-  <h1>💖 To Moja Pierwsza Zaprogramowana Strona KOCHAM CIĘ! 💖</h1>
-  <h2>✨ Witam Cię na mojej pierwszej napisanej stronie ✨</h2>
-
-  <!-- Twoje zdjęcie (zmniejszone do max 400px) -->
-  <img src="mojazdziewczyna.jpg" alt="Moja dziewczyna">
-
-  <div class="controls">
-    <!-- przycisk pokazujący wielki napis + odtwarzający lokalny plik muzyczny -->
-    <button onclick="pokazLove()">Kliknij mnie 💘</button>
-
-    <!-- link do Spotify (otwiera w nowej karcie) -->
-    <a class="spotify-link" href="https://open.spotify.com/track/0c4tY4Ci6zHxfLzlixPoJW" target="_blank" rel="noopener">Odsłuchaj na Spotify — Chada „L”</a>
-  </div>
-
-  <!-- Opcjonalny osadzony odtwarzacz Spotify -->
-  <div class="spotify-embed" style="width: 320px; height: 80px;">
-    <iframe
-      src="https://open.spotify.com/embed/track/0c4tY4Ci6zHxfLzlixPoJW"
-      width="320"
-      height="80"
-      frameborder="0"
-      allowtransparency="true"
-      allow="encrypted-media">
-    </iframe>
-  </div>
-
-  <!-- Duży pulsujący napis, który pojawi się po kliknięciu -->
-  <div id="love-message">KOCHAM CIĘ 💕</div>
-
-  <!-- Lokalna muzyka (jeśli masz plik muzyka.mp3) -->
-  <audio id="muzyka" src="muzyka.mp3"></audio>
-
-  <script>
-    function pokazLove() {
-      // pokaż wielki napis
-      const love = document.getElementById("love-message");
-      love.style.display = "block";
-      // spróbuj odtworzyć lokalną muzykę (jeśli jest dostępna)
-      const audio = document.getElementById("muzyka");
-      if (audio) {
-        // play zwróci promise; niektórzy użytkownicy muszą najpierw zezwolić na audio w przeglądarce
-        audio.play().catch(e => {
-          // jeśli autoplay zablokowany, możesz poprosić użytkownika o kliknięcie ponownie
-          console.log("Odtwarzanie lokalnej muzyki zablokowane przez przeglądarkę:", e);
+    <header>
+        <nav>
+            <img src="IMG_7510.jpeg" alt="ProVent AS Logo" class="logo">
+            <div class="menu">
+                <a href="#hjem">Hjem</a>
+                <a href="#tjenester">Tjenester</a>
+                <a href="#team">Team</a>
+                <a href="#kontakt">Kontakt</a>
+            </div>
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="no">NO</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="pl">PL</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="hjem" class="hero">
+            <h1 data-i18n="hero_title">Velkommen til ProVent AS</h1>
+            <p data-i18n="hero_subtitle">Din totalleverandør av ventilasjon, isolasjon og service i Norge. Vi sikrer optimalt inneklima med kvalitet og erfaring.</p>
+        </section>
+        <section id="tjenester">
+            <h2 data-i18n="tjenester-title">Våre tjenester</h2>
+            <div class="services">
+                <div class="card">
+                    <h3 data-i18n="t1">Montasje av ventilasjonssystemer</h3>
+                    <p data-i18n="t1-desc">Komplett installasjon av ventilasjonsanlegg for bolig og næring.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="t2">Rehabilitering</h3>
+                    <p data-i18n="t2-desc">Oppussing og forbedring av eksisterende systemer.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="t3">Innregulering og service</h3>
+                    <p data-i18n="t3-desc">Vedlikehold og optimalisering for best ytelse.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="t4">Isolasjon og prosjektering</h3>
+                    <p data-i18n="t4-desc">Prosjektering og isolering for energieffektive løsninger.</p>
+                </div>
+            </div>
+        </section>
+        <section id="team">
+            <h2 data-i18n="team-title">Vårt team</h2>
+            <div class="team">
+                <div class="card">
+                    <h3 data-i18n="dir-no">Krzysztof Wezka</h3>
+                    <p data-i18n="dir-p-no">Direktør</p>
+                    <p>Erfaren leder med fokus på kvalitet og kundetilfredshet.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="m1-no">Karol Czapla</h3>
+                    <p data-i18n="m1-p-no">Hovedmontør</p>
+                    <p>Spesialist på montasje og service.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="m2-no">Damian Olszewski</h3>
+                    <p data-i18n="m2-p-no">Hovedmontør</p>
+                    <p>Ekspert på rehabilitering.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="m3-no">Rafał Wieczorek</h3>
+                    <p data-i18n="m3-p-no">Hovedmontør</p>
+                    <p>Proff på isolasjon og prosjekter.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="m4-no">Marek Machanski</h3>
+                    <p data-i18n="m4-p-no">Hovedmontør</p>
+                    <p>Dyktig i alle ventilasjonsløsninger.</p>
+                </div>
+            </div>
+        </section>
+        <section id="kontakt">
+            <h2 data-i18n="kontakt-title">Kontakt oss</h2>
+            <p data-i18n="kontakt-text">Ta kontakt for befaring eller tilbud. Lerkesvingen 43, 3440 Røyken.</p>
+            <p>Tlf: <span data-i18n="phone">+47 123 45 678</span> | E-post: <span data-i18n="email">info@provent.no</span></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 ProVent AS. Alle rettigheter reservert.</p>
+    </footer>
+    <script>
+        const translations = {
+            no: {
+                title: 'ProVent AS - Ventilasjon, Isolasjon, Service',
+                hero_title: 'Velkommen til ProVent AS',
+                hero_subtitle: 'Din totalleverandør av ventilasjon, isolasjon og service i Norge. Vi sikrer optimalt inneklima med kvalitet og erfaring.',
+                tjenester-title: 'Våre tjenester',
+                t1: 'Montasje av ventilasjonssystemer',
+                't1-desc': 'Komplett installasjon av ventilasjonsanlegg for bolig og næring.',
+                t2: 'Rehabilitering',
+                't2-desc': 'Oppussing og forbedring av eksisterende systemer.',
+                t3: 'Innregulering og service',
+                't3-desc': 'Vedlikehold og optimalisering for best ytelse.',
+                t4: 'Isolasjon og prosjektering',
+                't4-desc': 'Prosjektering og isolering for energieffektive løsninger.',
+                'team-title': 'Vårt team',
+                'dir-no': 'Krzysztof Wezka',
+                'dir-p-no': 'Direktør',
+                'm1-no': 'Karol Czapla',
+                'm1-p-no': 'Hovedmontør',
+                'm2-no': 'Damian Olszewski',
+                'm2-p-no': 'Hovedmontør',
+                'm3-no': 'Rafał Wieczorek',
+                'm3-p-no': 'Hovedmontør',
+                'm4-no': 'Marek Machanski',
+                'm4-p-no': 'Hovedmontør',
+                'kontakt-title': 'Kontakt oss',
+                'kontakt-text': 'Ta kontakt for befaring eller tilbud.',
+                phone: '+47 123 45 678',
+                email: 'info@provent.no'
+            },
+            en: {
+                title: 'ProVent AS - Ventilation, Insulation, Service',
+                hero_title: 'Welcome to ProVent AS',
+                hero_subtitle: 'Your total supplier of ventilation, insulation and service in Norway. We ensure optimal indoor climate with quality and experience.',
+                tjenester-title: 'Our services',
+                t1: 'Installation of ventilation systems',
+                't1-desc': 'Complete installation of ventilation systems for homes and commercial.',
+                t2: 'Rehabilitation',
+                't2-desc': 'Renovation and improvement of existing systems.',
+                t3: 'Balancing and service',
+                't3-desc': 'Maintenance and optimization for best performance.',
+                t4: 'Insulation and design',
+                't4-desc': 'Design and insulation for energy-efficient solutions.',
+                'team-title': 'Our team',
+                'dir-no': 'Krzysztof Wezka',
+                'dir-p-no': 'Director',
+                'm1-no': 'Karol Czapla',
+                'm1-p-no': 'Lead Installer',
+                'm2-no': 'Damian Olszewski',
+                'm2-p-no': 'Lead Installer',
+                'm3-no': 'Rafał Wieczorek',
+                'm3-p-no': 'Lead Installer',
+                'm4-no': 'Marek Machanski',
+                'm4-p-no': 'Lead Installer',
+                'kontakt-title': 'Contact us',
+                'kontakt-text': 'Get in touch for inspection or quote.',
+                phone: '+47 123 45 678',
+                email: 'info@provent.no'
+            },
+            pl: {
+                title: 'ProVent AS - Wentylacja, Izolacja, Serwis',
+                hero_title: 'Witamy w ProVent AS',
+                hero_subtitle: 'Twój całkowity dostawca wentylacji, izolacji i serwisu w Norwegii. Zapewniamy optymalny klimat wewnętrzny z jakością i doświadczeniem.',
+                tjenester-title: 'Nasze usługi',
+                t1: 'Montaż systemów wentylacyjnych',
+                't1-desc': 'Kompletny montaż systemów wentylacyjnych dla domów i obiektów komercyjnych.',
+                t2: 'Modernizacja',
+                't2-desc': 'Remont i ulepszanie istniejących systemów.',
+                t3: 'Regulacja i serwis',
+                't3-desc': 'Konserwacja i optymalizacja dla najlepszej wydajności.',
+                t4: 'Izolacja i projektowanie',
+                't4-desc': 'Projektowanie i izolacja dla energooszczędnych rozwiązań.',
+                'team-title': 'Nasz zespół',
+                'dir-no': 'Krzysztof Wezka',
+                'dir-p-no': 'Dyrektor',
+                'm1-no': 'Karol Czapla',
+                'm1-p-no': 'Główny monter',
+                'm2-no': 'Damian Olszewski',
+                'm2-p-no': 'Główny monter',
+                'm3-no': 'Rafał Wieczorek',
+                'm3-p-no': 'Główny monter',
+                'm4-no': 'Marek Machanski',
+                'm4-p-no': 'Główny monter',
+                'kontakt-title': 'Kontakt',
+                'kontakt-text': 'Skontaktuj się po inspekcję lub wycenę.',
+                phone: '+47 123 45 678',
+                email: 'info@provent.no'
+            }
+        };
+        function setLang(lang) {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = translations[lang][key] || el.textContent;
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+        }
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLang(btn.dataset.lang));
         });
-      }
-      // przewiń do napisu (opcjonalne, ładniejszy efekt na małych ekranach)
-      love.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  </script>
+        setLang('no');
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 </body>
 </html>
 
+  
